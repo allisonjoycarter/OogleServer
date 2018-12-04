@@ -24,8 +24,8 @@ if (!fs.existsSync('./programmers.json')) {
 }
 
 // Build our routes
-
-const programmers = JSON.parse(fs.readFileSync('./programmers.json', 'utf8'));
+const programmers = [];
+programmers[database["SID"]] = database;
 
 app.get('/', (req, res) => {
   res.json(programmers);
@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 app.get('/:id', (req, res) => {
   const id = req.params.id;
-
+  console.log(id);
   res.send(programmers[id]);
 });
 
@@ -41,15 +41,15 @@ app.put('/:id', (req, res) => {
   const id = req.params.id;
   console.log(req.body);
   programmers[id] = req.body;
-  console.log(programmers);
+  console.log(id);
   res.send(programmers[id]);
 });
 
 app.post('/', (req, res) => {
   const body = req.body; // Hold your JSON in here!
 	console.log(body);
-	programmers[body.name] = body
-	console.log(programmers)
+	programmers[body.SID] = body
+	console.log(programmers[body.SID])
 	res.sendStatus(200);
 });
 
